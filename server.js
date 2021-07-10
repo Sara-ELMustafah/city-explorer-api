@@ -49,15 +49,15 @@ server.get('/shoppingList',(request,response) => {
 
 
 //localhost:3001/getPokeInfo?PokeInfo=bulbasor
-server.get('/getPokeInfo',(req,res)=>{
-    console.log(req.query);
-    let selectedPoke = pokeData.results.find(pokemon =>{
-        if(pokemon.name== req.query.pokeInfo){
-            return pokemon
-        }
-    })
-    res.status(200).send(selectedPoke);
-})
+// server.get('/getPokeInfo',(req,res)=>{
+//     console.log(req.query);
+//     let selectedPoke = pokeData.results.find(pokemon =>{
+//         if(pokemon.name== req.query.pokeInfo){
+//             return pokemon
+//         }
+//     })
+//     res.status(200).send(selectedPoke);
+// })
 
 //For handeling any route
 //order is matter it should be the last
