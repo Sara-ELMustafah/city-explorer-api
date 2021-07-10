@@ -5,7 +5,15 @@
 //I will have node_modules inside it the express folder
 const express = require('express');//npm i express
 
+
+//I can't enforce heroku to use the 3001
 require('dotenv').config(); //npm i dotenv
+
+
+//cross origin resource sharing
+//For security and privacy I will make it public so anyone has the permission
+//to send me a request so I can give him a response 
+const cors= require('cors'); //npm i cors
 
 const cityData = require('./assets/weather.json');
 
@@ -18,6 +26,8 @@ const server= express();
 //in the React was 3000 by default here we should declare it by ourselves
 const PORT=process.env.PORT; //anything instead of 3000
 //keep it PORT to be matched with .env in heroku
+
+server.use(cors()); // make it open to any client cause it's empty 
 
 //Will take 2 parameters the port# and a function with a console.log 
 //to make sure that hte server is running
@@ -53,7 +63,7 @@ server.get('/getPokeInfo',(req,res)=>{
     console.log(req.query);
     let selectedPoke = pokeData.results.find(pokemon =>{
         if(pokemon.name== req.query.pokeInfo){
-            return pokemon
+            return pokemon;
         }
     })
     res.status(200).send(selectedPoke);
@@ -66,7 +76,7 @@ server.get('/getCityInfo',(req,res)=>{
     console.log(req.query);
     let selectedCity = cityData.find(item =>{
         if(item.city_name === req.query.cityName){
-            return item
+            return item;
         }
     })
     res.status(200).send(selectedCity);
