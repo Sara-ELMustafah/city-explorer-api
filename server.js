@@ -7,7 +7,7 @@ const express = require('express');//npm i express
 
 require('dotenv').config(); //npm i dotenv
 
-const pokeData = require('./assets/weather.json');
+const cityData = require('./assets/weather.json');
 
 
 //We initialized the express server it has all the properties and methods
@@ -49,15 +49,30 @@ server.get('/shoppingList',(request,response) => {
 
 
 //localhost:3001/getPokeInfo?PokeInfo=bulbasor
-// server.get('/getPokeInfo',(req,res)=>{
-//     console.log(req.query);
-//     let selectedPoke = pokeData.results.find(pokemon =>{
-//         if(pokemon.name== req.query.pokeInfo){
-//             return pokemon
-//         }
-//     })
-//     res.status(200).send(selectedPoke);
-// })
+server.get('/getPokeInfo',(req,res)=>{
+    console.log(req.query);
+    let selectedPoke = pokeData.results.find(pokemon =>{
+        if(pokemon.name== req.query.pokeInfo){
+            return pokemon
+        }
+    })
+    res.status(200).send(selectedPoke);
+})
+
+
+
+//localhost:3001/getCityInfo?cityName=Amman
+server.get('/getCityInfo',(req,res)=>{
+    console.log(req.query);
+    let selectedCity = cityData.find(item =>{
+        if(item.city_name === req.query.cityName){
+            return item
+        }
+    })
+    res.status(200).send(selectedCity);
+})
+
+
 
 //For handeling any route
 //order is matter it should be the last
