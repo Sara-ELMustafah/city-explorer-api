@@ -5,6 +5,7 @@
 //I will have node_modules inside it the express folder
 const express = require('express');//npm i express
 
+require('dotenv').config(); //npm i dotenv
 
 const pokeData = require('./assets/weather.json');
 
@@ -15,8 +16,8 @@ const server= express();
 
 //We need to declare our port# to connect the frontend with the backend
 //in the React was 3000 by default here we should declare it by ourselves
-const PORT=3001; //anything insted of 3000
-
+const PORT=process.env.PORT; //anything instead of 3000
+//keep it PORT to be matched with .env in heroku
 
 //Will take 2 parameters the port# and a function with a console.log 
 //to make sure that hte server is running
