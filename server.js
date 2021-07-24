@@ -1,6 +1,6 @@
 'use strict';
 
-//I want to use express library aftre I install it in the terminal
+//I want to use express library after I install it in the terminal
 // in order to use its methods So I will import it using require
 //I will have node_modules inside it the express folder
 const express = require('express');//npm i express
@@ -16,7 +16,7 @@ require('dotenv').config(); //npm i dotenv
 const cors= require('cors'); //npm i cors
 
 const cityData = require('./assets/weather.json');
-
+const axios=require('axios');
 
 //We initialized the express server it has all the properties and methods
 //of express
@@ -81,6 +81,44 @@ server.get('/getCityInfo',(req,res)=>{
     })
     res.status(200).send(selectedCity);
 })
+
+//Routes or End points
+//localhost:3001/getPhotos?searchQuery=book
+server.get('/getPhotos',getPhotosHandler);
+
+//Function handlers
+// async function getPhotosHandler (req,res) {
+//     let sQuery=req.query.searchQuery;
+//     //https://api.unsplash.com/search/photos?query=office&client_id=Wk41zyNddCtjUHIz5HwZRFq4ehf24AYiMlq9ifLjCGA
+//     let url= `https://api.unsplash.com/search/photos?query=${sQuery}&client_id=${process.env.UNSPLASH_KEY}`
+    
+//     try {
+//         let photoData=await axios.get(url);
+//         //whenever you git the data using axios it will be inside the data property
+//         res.send(photoData.data);
+//     }
+//     catch(error){
+//         res.status(500).send(error);
+//     }
+    
+// }
+
+
+async function getPhotosHandler (req,res) {
+    let sQuery=req.query.searchQuery;
+    //https://api.unsplash.com/search/photos?query=office&client_id=Wk41zyNddCtjUHIz5HwZRFq4ehf24AYiMlq9ifLjCGA
+    let url= `https://api.unsplash.com/search/photos?query=${sQuery}&client_id=${process.env.UNSPLASH_KEY}`
+    
+    //Once you git the data save it in photoData
+        axios.get(url).then(photoData =>{
+            res.send(photoData.data);
+        })
+        .catch(error =>{
+           res.status(500).send(error)
+        })
+        //whenever you git the data using axios it will be inside the data property
+}
+
 
 
 
