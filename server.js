@@ -111,7 +111,7 @@ async function getPhotosHandler (req,res) {
     
     //Once you git the data save it in photoData
         axios.get(url).then(photoData =>{
-            res.send(photoData.data);
+            res.send(photoData.data.results);
         })
         .catch(error =>{
            res.status(500).send(error)
